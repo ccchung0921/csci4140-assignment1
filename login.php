@@ -10,21 +10,27 @@ session_start();
 if (isset($_POST['submit'])){
     $userVerification = $_POST['verification'];
     if ($_POST['verification'] == $_SESSION['secure']){
-    $username = mysqli_real_escape_string($conn,$_POST['username']);
-    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $username = pg_escape_string($conn,$_POST['username']);
+    $password = pg_escape_string($conn,$_POST['password']);
 
     $sql ="SELECT * from users WHERE username = '$username' AND password = '$password' ";
 
-    $result = mysqli_query($conn,$sql);
+    $result = pg_query($conn,$sql);
 
-    if (mysqli_num_rows($result) == 1){
-        $user = mysqli_fetch_assoc($result);
+    if (pg_num_rows($result) == 1){
+        $user = pg_fetch_assoc($result);
         setcookie('username',$username,time() + 86400);
         setcookie('userid',$user['id'],time() + 86400);
-        header('Location: index.php');
+        if ($username == 'admin'){
+            header('Location:init.php');
+        }else{
+            header('Location: index.php');
+        }
+   }else{
+       header('Location: login_error.php');
    }
     }else{
-       echo('wronngggggggg veriication');
+       header('Location: login_error.php');
     }
 }
 

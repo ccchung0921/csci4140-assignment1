@@ -6,7 +6,7 @@ session_start();
 $_SESSION['secure'] = str_pad(rand(1,9999),4,'0',STR_PAD_LEFT);
 $text = $_SESSION['secure'];
 $i = 0;
-$random_dots = 10;
+$random_dots = 30;
 $image_width = 100;
 $image_height = 30;
 // Create the image
