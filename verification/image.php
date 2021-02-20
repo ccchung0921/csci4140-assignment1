@@ -9,10 +9,9 @@ $i = 0;
 $random_dots = 30;
 $image_width = 100;
 $image_height = 30;
-// Create the image
 $im = imagecreatetruecolor($image_width, $image_height);
 
-// Create some colors
+
 $white = imagecolorallocate($im, 255, 255, 255);
 $grey = imagecolorallocate($im, 128, 128, 128);
 $black = imagecolorallocate($im, 0, 0, 0);
@@ -28,7 +27,6 @@ for($i=0; $i<$random_dots;$i++){
     imagefilledellipse($im,rand(0,$image_width),rand(0,$image_height),2,3,$white);
 }
 
-// Using imagepng() results in clearer text compared with imagejpeg()
 imagepng($im);
 imagedestroy($im);
 ?>
